@@ -27,10 +27,11 @@ export default {
   },
   methods: {
     save: function () {
-      debugger;
       if (!this.name || !this.deadline) {
-        return this.error = 'Preencha todos os campos'
+        this.error = 'Preencha todos os campos'
+        return false
       }
+
       this.$emit('updateList', {
         'name': this.name,
         'deadline': this.deadlineFormat,

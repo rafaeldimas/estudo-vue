@@ -18,3 +18,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  #app {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+</style>

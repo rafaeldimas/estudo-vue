@@ -57,6 +57,8 @@ export default {
   justify-content: flex-start;
   align-items: baseline;
   flex-wrap: wrap;
+  padding-left: 10px;
+  padding-right: 10px;
   margin-top: 15px;
   margin-bottom: 15px;
 

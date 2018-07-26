@@ -71,18 +71,17 @@ export default {
   padding: 15px;
   width: 100%;
   max-width: 500px;
-}
 
-.todo-list .table-todo-list {
-  width: 100%;
-  border-collapse: collapse;
-}
+  .table-todo-list {
+    width: 100%;
+    border-collapse: collapse;
 
-.todo-list .table-todo-list thead tr th {
-  padding-top: 5px;
-  padding-bottom: 15px;
-  color: darken($color, 15%);
-  // border-bottom: 1px solid $color;
+    thead tr th {
+      padding-top: 5px;
+      padding-bottom: 15px;
+      color: darken($color, 15%);
+    }
+  }
 }
 
 </style>

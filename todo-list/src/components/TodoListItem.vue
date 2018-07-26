@@ -26,22 +26,22 @@ export default {
 
 .todo-list-item {
   border-bottom: 1px solid $color;
-}
 
-.todo-list-item:last-of-type {
-  border-bottom: none;
-}
+  &:last-of-type {
+    border-bottom: none;
+  }
 
-.todo-list-item td {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  text-align: center;
-  color: darken($color, 30%);
-  border-left: 1px solid $color;
-}
+  td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    color: darken($color, 30%);
+    border-left: 1px solid $color;
 
-.todo-list-item td:first-of-type {
-  border-left: none;
+    &:first-of-type {
+      border-left: none;
+    }
+  }
 }
 
 </style>

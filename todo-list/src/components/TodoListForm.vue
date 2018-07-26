@@ -53,52 +53,77 @@ export default {
 <style lang="scss" scoped>
 
 .form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  flex-wrap: wrap;
   margin-top: 15px;
   margin-bottom: 15px;
+
+  p {
+    width: 100%;
+    color: darken($color, 15%);
+    text-align: center;
+  }
+
+  input {
+    flex: 2;
+    margin-right: 10px;
+    padding: 5px 10px;
+    height: 30px;
+    color: darken($color, 15%);
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: $color;
+    transition: all .5s;
+
+    &:focus {
+      animation: cool-border 1s linear forwards;
+      background-color: rgba($color, .07);
+    }
+  }
+
+  button {
+    flex: 1;
+    position: relative;
+    padding: 5px 15px;
+    height: 28px;
+    cursor: pointer;
+    color: darken($color, 15%);
+    transition: all .5s;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 100%;
+      height: 100%;
+      border-width: 1px;
+      border-style: solid;
+      border-color: transparent;
+      border-bottom-color: $color;
+      transition: all .5s;
+    }
+
+    &:hover::before {
+      animation: cool-border 1s linear forwards;
+      background-color: rgba($color, .07);
+    }
+  }
 }
 
-.form input {
-  padding: 5px 10px;
-  height: 30px;
-  color: darken($color, 15%);
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  border-bottom-color: $color;
-  transition: all .5s;
-}
+@media screen and (max-width: 500px) {
+  .form {
+    flex-direction: column;
 
-.form button {
-  position: relative;
-  padding: 5px 15px;
-  height: 30px;
-  cursor: pointer;
-  color: darken($color, 15%);
-  transition: all .5s;
-}
-
-.form button:before {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: -1px;
-  width: 100%;
-  height: 100%;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
-  border-bottom-color: $color;
-  transition: all .5s;
-}
-
-.form input:focus {
-  animation: cool-border 1s linear forwards;
-  background-color: rgba($color, .07);
-}
-
-.form button:hover::before {
-  animation: cool-border 1s linear forwards;
-  background-color: rgba($color, .07);
+    input, button {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  }
 }
 
 @keyframes cool-border {

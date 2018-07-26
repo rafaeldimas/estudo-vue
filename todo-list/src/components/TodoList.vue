@@ -32,6 +32,12 @@ export default {
     TodoListForm,
     TodoListItem
   },
+  mounted () {
+    const list = window.localStorage.getItem('list')
+    if (list) {
+      this.list = JSON.parse(list)
+    }
+  },
   data () {
     return {
       countItem: 0,
@@ -42,6 +48,7 @@ export default {
     updateList: function (item) {
       item.id = ++this.countItem
       this.list.push(item)
+      window.localStorage.setItem('list', JSON.stringify(this.list))
     },
     alterStatus: function (data) {
       let item = this.list.find(item => item.id === data.id)

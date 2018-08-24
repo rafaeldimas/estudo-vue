@@ -1,23 +1,21 @@
 <template>
-  <div class="list-todo-list">
-    <div class="box-title">
-      <h1 class="title">TodoList</h1>
-    </div>
-    <div class="list">
-      <ul>
+  <main class="section list-todo-list">
+    <div class="container">
+      <h1 class="has-text-centered title">TodoList</h1>
+      <div class="columns">
         <ItemListTodoList
           v-for="item in list"
           :key="item.id"
           :item="item"
           v-on:checkItem="handleCheckItem" />
-      </ul>
+      </div>
+      <div class="box-button-add">
+        <router-link to="/list/new">
+          <font-awesome-icon icon="plus"></font-awesome-icon>
+        </router-link>
+      </div>
     </div>
-    <div class="box-button-add">
-      <router-link to="/list/new">
-        <font-awesome-icon icon="plus"></font-awesome-icon>
-      </router-link>
-    </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -50,6 +48,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

@@ -52,7 +52,7 @@ export default {
     },
     alterStatus: function (data) {
       let item = this.list.find(item => item.id === data.id)
-      let index = this.list.find(item => item.id === data.id)
+      let index = this.list.findIndex(item => item.id === data.id)
 
       item.status = data.status
 

@@ -19,7 +19,7 @@
         <router-link :to="'/list/' + item.name" class="card-footer-item" title="Editar">
           <font-awesome-icon :icon="['far', 'edit']"></font-awesome-icon>
         </router-link>
-        <a class="card-footer-item" title="Excluir">
+        <a class="card-footer-item" title="Excluir" v-on:click="handleRemoveItem(item.id)">
           <font-awesome-icon :icon="['far', 'times-circle']"></font-awesome-icon>
         </a>
       </footer>
@@ -42,20 +42,17 @@ export default {
   methods: {
     handleCheckItem: function (id) {
       this.$emit('checkItem', {
-        'id': id,
+        id,
         'finalized': !this.item.finalized
       })
+    },
+    handleRemoveItem: function (id) {
+      this.$emit('removeItem', { id })
     }
   }
 }
 </script>
 
-<style scoped>
-/* .box-button-checked {
-  cursor: pointer;
-  color: #999;
-}
-.box-button-checked.active {
-  color: #13c753;
-} */
+<style lang="sass" scoped>
+
 </style>

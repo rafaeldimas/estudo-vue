@@ -1,43 +1,33 @@
 <template>
-  <div class="new-list-todo-list">
-    <input type="text" name="name" id="name" v-model="name">
-    <textarea name="description" id="description" v-model="description"></textarea>
-    <input type="date" name="deadline" id="deadline" v-model="deadline">
-    <button id="button" v-on:click="handleSaveNewItemList">save</button>
-  </div>
+  <main class="section new-list-todo-list">
+    <div class="container">
+      <FormTodoList v-on:saveItemList="handleSaveNewItemList" />
+    </div>
+  </main>
 </template>
 
 <script>
-import hash from 'object-hash'
+import FormTodoList from '@/components/FormTodoList'
 
 export default {
   name: 'NewListTodoList',
+  components: { FormTodoList },
   data () {
-    return {
-      name: '',
-      description: '',
-      deadline: ''
-    }
-  },
-  computed: {
-    id: function () {
-      return hash(this.$data)
-    }
+    return {}
   },
   methods: {
-    handleSaveNewItemList: function () {
-      if (!this.name && !this.deadline) {
+    handleSaveNewItemList: function (data) {
+      if (!data.name || !data.description || !data.deadline) {
         return alert('Preencha todos os campos')
       }
 
-      const vm = this
       const list = JSON.parse(window.localStorage.getItem('list') || '[]')
 
-      if (list.findIndex(item => item.name === vm.name) !== -1) {
-        return alert('Nome não pode repetir')
+      if (list.findIndex(item => item.id === data.id) !== -1) {
+        return alert('Não é possivel salvar um item exatamente igual.')
       }
 
-      const item = { id: this.id, finalized: false, ...this.$data }
+      const item = { ...data, finalized: false }
 
       list.push(item)
 

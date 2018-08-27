@@ -2,7 +2,7 @@
   <main class="section list-todo-list">
     <div class="container">
       <h1 class="has-text-centered title">TodoList</h1>
-      <div class="columns">
+      <div class="columns is-multiline">
         <ItemListTodoList
           v-for="item in list"
           :key="item.id"

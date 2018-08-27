@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import hash from 'object-hash'
+
 export default {
   name: 'NewListTodoList',
   data () {
@@ -18,10 +20,8 @@ export default {
     }
   },
   computed: {
-    id: () => {
-      const list = window.localStorage.getItem('list')
-
-      return !list ? 0 : ++JSON.parse(list).length
+    id: function () {
+      return hash(this.$data)
     }
   },
   methods: {

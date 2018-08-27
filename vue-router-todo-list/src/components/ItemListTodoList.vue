@@ -36,7 +36,7 @@ export default {
       return new Date(this.item.deadline).toLocaleDateString()
     },
     getStatusClass: function () {
-      return !this.item.finalized ? '' : 'has-text-primary'
+      return !this.item.finalized ? '' : 'has-text-white has-background-primary'
     }
   },
   methods: {

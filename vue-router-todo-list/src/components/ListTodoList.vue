@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .list-todo-list .box-button-add .button {
   padding: 2em 1.5em;
   position: fixed;

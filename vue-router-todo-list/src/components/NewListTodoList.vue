@@ -1,7 +1,9 @@
 <template>
   <main class="section new-list-todo-list">
     <div class="container">
-      <FormTodoList v-on:saveItemList="handleSaveNewItemList" />
+      <FormTodoList
+        :dataError="errors"
+        v-on:saveItemList="handleSaveNewItemList" />
     </div>
   </main>
 </template>
@@ -13,18 +15,21 @@ export default {
   name: 'NewListTodoList',
   components: { FormTodoList },
   data () {
-    return {}
+    return {
+      errors: []
+    }
   },
   methods: {
     handleSaveNewItemList: function (data) {
+      this.errors = []
       if (!data.name || !data.description || !data.deadline) {
-        return alert('Preencha todos os campos')
+        return this.errors.push('Preencha todos os campos')
       }
 
       const list = JSON.parse(window.localStorage.getItem('list') || '[]')
 
       if (list.findIndex(item => item.id === data.id) !== -1) {
-        return alert('Não é possivel salvar um item exatamente igual.')
+        return this.errors.push('Não é possivel salvar um item exatamente igual.')
       }
 
       const item = { ...data, finalized: false }

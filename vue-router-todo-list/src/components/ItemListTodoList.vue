@@ -16,7 +16,7 @@
         <a class="card-footer-item" :class="getStatusClass" v-on:click="handleCheckItem(item.id)" title="Finalizar">
           <font-awesome-icon :icon="['far', 'check-circle']"></font-awesome-icon>
         </a>
-        <router-link :to="'/list/' + item.name" class="card-footer-item" title="Editar">
+        <router-link :to="`/list/${item.id}`" class="card-footer-item" title="Editar">
           <font-awesome-icon :icon="['far', 'edit']"></font-awesome-icon>
         </router-link>
         <a class="card-footer-item" title="Excluir" v-on:click="handleRemoveItem(item.id)">
@@ -33,7 +33,7 @@ export default {
   props: ['item'],
   computed: {
     deadlineFormated: function () {
-      return new Date(this.item.deadline).toLocaleDateString()
+      return (new Date(`${this.item.deadline} 00:00:00`)).toLocaleDateString()
     },
     getStatusClass: function () {
       return !this.item.finalized ? '' : 'has-text-white has-background-primary'

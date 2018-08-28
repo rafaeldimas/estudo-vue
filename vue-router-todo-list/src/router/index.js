@@ -10,7 +10,7 @@ export default new Router({
   routes: [
     { path: '/', name: 'ListTodoList', component: ListTodoList },
     { path: '/list/new', name: 'NewListTodoList', component: NewListTodoList },
-    { path: '/list/:list', name: 'EditListTodoList', component: EditListTodoList }
+    { path: '/list/:id', name: 'EditListTodoList', component: EditListTodoList }
   ],
   mode: 'history'
 })

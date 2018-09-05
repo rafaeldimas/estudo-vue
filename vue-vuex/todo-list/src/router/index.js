@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+
+/* Pages */
+import PageLogin from '@/pages/Login/Login'
+import PagePanel from '@/pages/Panel/Panel'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
+    { path: '/', name: 'PageLogin', component: PageLogin },
+    { path: '/panel', name: 'PagePanel', component: PagePanel }
   ]
 })

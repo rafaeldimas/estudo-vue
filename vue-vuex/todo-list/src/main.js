@@ -1,11 +1,16 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import Root from './Root'
 import router from './router'
 import store from './store'
+import httpPlugin from './plugins/http'
 
-import './config'
+import { fa } from './config'
+
+/* Component FontAwesomeIcon */
+Vue.component('font-awesome-icon', fa)
+
+/* Plugin $http from axios */
+Vue.use(httpPlugin)
 
 Vue.config.productionTip = false
 

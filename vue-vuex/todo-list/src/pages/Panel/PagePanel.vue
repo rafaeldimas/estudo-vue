@@ -1,6 +1,6 @@
 <template>
   <div class="page-panel">
-
+    <TodoList />
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import TodoList from './components/TodoList'
 
 export default {
   name: 'PagePanel',
-  components: [TodoList]
+  components: { TodoList }
 }
 </script>
 

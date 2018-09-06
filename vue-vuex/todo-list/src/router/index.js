@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 /* Pages */
-import PageLogin from '@/pages/Login/Login'
-import PagePanel from '@/pages/Panel/Panel'
+import PageLogin from '@/pages/Login/PageLogin'
+import PagePanel from '@/pages/Panel/PagePanel'
 
 Vue.use(Router)
 

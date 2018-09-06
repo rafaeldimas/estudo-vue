@@ -1,11 +1,9 @@
 <template>
-  <div id="root">
-    <section class="section">
-      <div class="container">
-        <router-view/>
-      </div>
-    </section>
-  </div>
+  <section class="section">
+    <div class="container">
+      <router-view/>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -14,4 +12,4 @@ export default {
 }
 </script>
 
-<style lang="scss" src="assets/scss/app.scss"></style>
+<style lang="scss" src="./assets/scss/app.scss"></style>

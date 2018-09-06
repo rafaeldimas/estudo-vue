@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
+/* Modules */
 import user from './modules/user'
 import todo from './modules/todo'
 

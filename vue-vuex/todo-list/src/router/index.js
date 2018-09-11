@@ -11,5 +11,6 @@ export default new Router({
   routes: [
     { path: '/', name: 'PageLogin', component: PageLogin },
     { path: '/panel', name: 'PagePanel', component: PagePanel }
-  ]
+  ],
+  mode: 'history'
 })

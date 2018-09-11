@@ -2,11 +2,11 @@
   <div class="notifications" v-show="hasNotifications">
     <div
       class="notification"
-      :class="`is-${notification.status}`"
-      v-for="notification in notifications"
-      :key="notification.status"
+      :class="`is-${status}`"
+      v-for="(notification, status) in notifications"
+      :key="status"
       v-show="notification.messages.length">
-        <button class="delete" v-on:click="removeNotificationsByStatus(notification.status)"></button>
+        <button class="delete" v-on:click="removeNotificationsByStatus(status)"></button>
         <p class="message" v-for="message in notification.messages" :key="message.text">
           <strong>{{ message.header }}: </strong> {{ message.text }}
         </p>
@@ -25,7 +25,7 @@ export default {
       hasNotifications: 'notification/hasNotifications'
     })
   },
-  methos: {
+  methods: {
     ...mapActions({
       removeNotificationsByStatus: 'notification/removeNotificationsByStatus'
     })
@@ -33,7 +33,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.message {
-  background-color: inherit;
+.notifications {
+  margin-bottom: 1.5rem;
+
+  .notification {
+    .message {
+      background-color: inherit;
+    }
+  }
 }
 </style>

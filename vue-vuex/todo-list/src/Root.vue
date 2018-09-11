@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section" :class="$route.name">
     <div class="container">
       <router-view/>
     </div>

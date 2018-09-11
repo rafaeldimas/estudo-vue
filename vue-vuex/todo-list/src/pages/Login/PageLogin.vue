@@ -18,7 +18,7 @@ export default {
 </style>
 
 <style lang="scss">
-body {
+.PageLogin {
   height: 100vh;
   background-image: url(https://picsum.photos/1400/1000);
   background-repeat: no-repeat;

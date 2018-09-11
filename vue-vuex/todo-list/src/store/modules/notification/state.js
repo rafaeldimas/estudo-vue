@@ -1,7 +1,7 @@
 export default {
-  notifications: [
-    { status: 'success', messages: [] },
-    { status: 'warning', messages: [] },
-    { status: 'danger', messages: [] }
-  ]
+  notifications: {
+    'success': { status: 'success', messages: [] },
+    'warning': { status: 'warning', messages: [] },
+    'danger': { status: 'danger', messages: [] }
+  }
 }

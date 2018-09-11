@@ -1,14 +1,13 @@
-import { isObject, remove } from 'lodash'
+import { isObject } from 'lodash'
 
 const addNotificationByStatus = (state, { status, notification }) => {
-  const statusIndex = state.notifications.findIndex(item => item.status === status)
-  if (isObject(state.notifications[statusIndex])) {
-    return state.notifications[statusIndex].messages.push(notification)
+  if (isObject(state.notifications[status])) {
+    return state.notifications[status].messages.push(notification)
   }
-  state.notifications[statusIndex] = { status, notification }
+  state.notifications[status] = { status, messages: [ notification ] }
 }
 
-const removeNotificationsByStatus = (state, status) => remove(state.notifications, notification => notification.status === status)
+const removeNotificationsByStatus = (state, status) => (state.notifications[status].messages = [])
 
 export default {
   addNotificationByStatus,

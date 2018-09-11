@@ -1,12 +1,21 @@
 import { user } from '@/api'
 
 const login = async ({ commit }, payload) => {
-  const userData = await user.getUser(payload)
-  if (userData) {
+  try {
+    const userData = await user.getUser(payload)
+    if (!userData) {
+      throw new Error('User data not found')
+    }
+
     commit('setUserLogged', userData)
+
     if (payload.remenber) {
       window.localStorage.setItem('user', JSON.stringify(userData))
     }
+
+    return { status: true, userData }
+  } catch (error) {
+    return { status: false, error }
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="login-form column is-4 is-offset-4">
+  <div class="login-form column is-8-tablet is-offset-2-tablet">
 
     <Notification />
 
@@ -55,8 +55,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      hasNotifications: 'notification/hasNotifications',
-      isLogged: 'user/isLogged'
+      hasNotifications: 'notification/hasNotifications'
     })
   },
   methods: {
@@ -77,24 +76,21 @@ export default {
         })
       }
 
-      if (this.hasNotifications) {
-        return false
-      }
-
-      this.login({ username, email, remenber }).then(() => {
-        if (this.isLogged) {
-          this.addNotificationSuccess({
-            header: 'Login Success',
-            text: 'Please wait while you are redirected.'
+      if (!this.hasNotifications) {
+        this.login({ username, email, remenber }).then((data) => {
+          if (data.status) {
+            this.addNotificationSuccess({
+              header: 'Login Success',
+              text: 'Please wait while you are redirected.'
+            })
+            return setTimeout(() => this.$router.push('/panel'), 2000)
+          }
+          this.addNotificationDanger({
+            header: 'Login failed',
+            text: `${data.error.message} (Try again later)`
           })
-          setTimeout(() => this.$router.push('/panel'), 1000)
-        }
-      }).catch(() => {
-        this.addNotificationDanger({
-          header: 'Login failed',
-          text: 'Try again later'
         })
-      })
+      }
     },
     ...mapActions({
       addNotificationSuccess: 'notification/addNotificationSuccess',
@@ -111,5 +107,9 @@ export default {
   padding: 5rem;
   background-color: rgba(250,250,250,0.7);
   border-radius: 1rem;
+
+  @media only screen and (max-width: 767px) {
+    padding: 1.5rem;
+  }
 }
 </style>

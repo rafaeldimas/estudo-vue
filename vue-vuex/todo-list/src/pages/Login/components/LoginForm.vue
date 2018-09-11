@@ -3,11 +3,11 @@
 
     <Notification />
 
-    <form v-on:submit="login">
+    <form v-on:submit.prevent="submitLogin">
 
       <div class="field">
         <p class="control has-icons-left">
-          <input class="input" type="text" placeholder="Username">
+          <input class="input" type="text" v-model="username" placeholder="Username">
           <span class="icon is-small is-left">
             <font-awesome-icon icon="user"></font-awesome-icon>
           </span>
@@ -16,7 +16,7 @@
 
       <div class="field">
         <p class="control has-icons-left">
-          <input class="input" type="email" placeholder="Email">
+          <input class="input" type="email" v-model="email" placeholder="Email">
           <span class="icon is-small is-left">
             <font-awesome-icon icon="envelope"></font-awesome-icon>
           </span>
@@ -26,7 +26,7 @@
       <div class="field is-grouped is-grouped-right">
         <div class="control">
           <label class="checkbox">
-            <input type="checkbox">
+            <input type="checkbox" v-model="remenber">
             keep logged in
           </label>
         </div>
@@ -48,19 +48,20 @@ export default {
   components: { Notification },
   data () {
     return {
-      username: '',
-      email: '',
+      username: 'Bret',
+      email: 'Sincere@april.biz',
       remenber: false
     }
   },
   computed: {
     ...mapGetters({
-      hasNotification: 'notification/hasNotifications'
+      hasNotifications: 'notification/hasNotifications',
+      isLogged: 'user/isLogged'
     })
   },
   methods: {
-    login () {
-      const { username, email } = this
+    submitLogin () {
+      const { username, email, remenber } = this
 
       if (!username) {
         this.addNotificationWarning({
@@ -76,14 +77,30 @@ export default {
         })
       }
 
-      if (this.hasNotification) {
-        return
+      if (this.hasNotifications) {
+        return false
       }
+
+      this.login({ username, email, remenber }).then(() => {
+        if (this.isLogged) {
+          this.addNotificationSuccess({
+            header: 'Login Success',
+            text: 'Please wait while you are redirected.'
+          })
+          setTimeout(() => this.$router.push('/panel'), 1000)
+        }
+      }).catch(() => {
+        this.addNotificationDanger({
+          header: 'Login failed',
+          text: 'Try again later'
+        })
+      })
     },
     ...mapActions({
       addNotificationSuccess: 'notification/addNotificationSuccess',
       addNotificationWarning: 'notification/addNotificationWarning',
-      addNotificationDanger: 'notification/addNotificationDanger'
+      addNotificationDanger: 'notification/addNotificationDanger',
+      login: 'user/login'
     })
   }
 }

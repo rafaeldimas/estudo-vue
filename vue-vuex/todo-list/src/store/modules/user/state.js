@@ -1,3 +1,3 @@
 export default {
-  userLogged: {}
+  userLogged: (window.sessionStorage.getItem('user') && JSON.parse(window.sessionStorage.getItem('user'))) || {}
 }

@@ -77,17 +77,16 @@ export default {
       }
 
       if (!this.hasNotifications) {
-        this.login({ username, email, remenber }).then((data) => {
-          if (data.status) {
-            this.addNotificationSuccess({
-              header: 'Login Success',
-              text: 'Please wait while you are redirected.'
-            })
-            return setTimeout(() => this.$router.push('/panel'), 2000)
-          }
+        this.login({ username, email, remenber }).then((user) => {
+          this.addNotificationSuccess({
+            header: 'Login Success',
+            text: `Welcome ${user.name}, please wait while you are redirected.`
+          })
+          setTimeout(() => this.$router.push('/panel'), 1500)
+        }).catch((error) => {
           this.addNotificationDanger({
             header: 'Login failed',
-            text: `${data.error.message} (Try again later)`
+            text: `${error.message} (Try again later)`
           })
         })
       }

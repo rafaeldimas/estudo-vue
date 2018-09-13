@@ -7,12 +7,16 @@ const addNotificationWarning = ({ commit }, notification) => commit('addNotifica
 /* Add notification danger */
 const addNotificationDanger = ({ commit }, notification) => commit('addNotificationByStatus', { status: 'danger', notification })
 
-/* Remove notifications by satus */
+/* Reset all notifications */
+const resetNotifications = ({ commit }) => commit('resetNotifications')
+
+/* Remove notifications by status */
 const removeNotificationsByStatus = ({ commit }, status) => commit('removeNotificationsByStatus', status)
 
 export default {
   addNotificationSuccess,
   addNotificationWarning,
   addNotificationDanger,
+  resetNotifications,
   removeNotificationsByStatus
 }

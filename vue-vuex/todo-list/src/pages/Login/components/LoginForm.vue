@@ -1,41 +1,52 @@
 <template>
-  <div class="login-form column is-8-tablet is-offset-2-tablet">
+  <div class="column is-full">
+    <div class="box-form-login">
 
-    <Notification />
+      <Notification />
 
-    <form v-on:submit.prevent="submitLogin">
-
-      <div class="field">
-        <p class="control has-icons-left">
-          <input class="input" type="text" v-model="username" placeholder="Username">
-          <span class="icon is-small is-left">
-            <font-awesome-icon icon="user"></font-awesome-icon>
-          </span>
-        </p>
-      </div>
-
-      <div class="field">
-        <p class="control has-icons-left">
-          <input class="input" type="email" v-model="email" placeholder="Email">
-          <span class="icon is-small is-left">
-            <font-awesome-icon icon="envelope"></font-awesome-icon>
-          </span>
-        </p>
-      </div>
-
-      <div class="field is-grouped is-grouped-right">
-        <div class="control">
-          <label class="checkbox">
-            <input type="checkbox" v-model="remenber">
-            keep logged in
-          </label>
+      <div class="container-logo">
+        <span class="line"></span>
+        <div class="logo">
+          <!-- In a real scenario would be used the logo of the application -->
+          <font-awesome-icon :icon="['far', 'user']"></font-awesome-icon>
         </div>
-        <div class="control">
-          <button class="button is-info">Cancel</button>
-        </div>
+        <span class="line"></span>
       </div>
 
-    </form>
+      <form v-on:submit.prevent="submitLogin">
+
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input" type="text" v-model="username" placeholder="Username">
+            <span class="icon is-small is-left">
+              <font-awesome-icon icon="user"></font-awesome-icon>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <p class="control has-icons-left">
+            <input class="input" type="email" v-model="email" placeholder="Email">
+            <span class="icon is-small is-left">
+              <font-awesome-icon icon="envelope"></font-awesome-icon>
+            </span>
+          </p>
+        </div>
+
+        <div class="field is-grouped is-grouped-right">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" v-model="remenber">
+              keep logged in
+            </label>
+          </div>
+          <div class="control">
+            <button class="button is-info">Login</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
   </div>
 </template>
 
@@ -82,7 +93,7 @@ export default {
             header: 'Login Success',
             text: `Welcome ${user.name}, please wait while you are redirected.`
           })
-          setTimeout(() => this.$router.push('/panel'), 1500)
+          setTimeout(() => this.resetNotifications() && this.$router.push('/panel'), 1500)
         }).catch((error) => {
           this.addNotificationDanger({
             header: 'Login failed',
@@ -95,6 +106,7 @@ export default {
       addNotificationSuccess: 'notification/addNotificationSuccess',
       addNotificationWarning: 'notification/addNotificationWarning',
       addNotificationDanger: 'notification/addNotificationDanger',
+      resetNotifications: 'notification/resetNotifications',
       login: 'user/login'
     })
   }
@@ -102,13 +114,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login-form {
-  padding: 5rem;
-  background-color: rgba(250,250,250,0.7);
-  border-radius: 1rem;
+.box-form-login {
+  margin: 0 auto;
+  max-width: 500px;
 
   @media only screen and (max-width: 767px) {
     padding: 1.5rem;
+  }
+
+  .container-logo {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+
+    .line {
+      flex-grow: 0;
+      width: 100%;
+      height: 3px;
+      background-color: rgba(230, 230, 230, .8);
+    }
+
+    .logo {
+      flex-shrink: 0;
+      width: 100px;
+      height: 100px;
+      color: rgba(230, 230, 230, .8);
+      font-size: 2rem;
+      text-align: center;
+      line-height: 90px;
+      border: 3px solid rgba(230, 230, 230, .8);
+      border-radius: 50%;
+    }
   }
 }
 </style>

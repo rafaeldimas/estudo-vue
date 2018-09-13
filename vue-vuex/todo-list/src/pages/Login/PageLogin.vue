@@ -20,18 +20,14 @@ export default {
 <style lang="scss">
 .PageLogin {
   height: 100vh;
-  background-image: url(https://picsum.photos/1400/1000);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: radial-gradient(farthest-corner at 200px 200px, #f07963, #78346F, #0e1070);
+  background-size: 200% 200%;
+  animation: PageLogin 10s ease infinite;
+}
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,.3);
-  }
+@keyframes PageLogin {
+    0%{background-position:97% 0%}
+    50%{background-position:4% 100%}
+    100%{background-position:97% 0%}
 }
 </style>

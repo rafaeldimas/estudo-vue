@@ -22,9 +22,9 @@ router.post('/register', async (req, res) => {
       return res.status(400).send({ error: 'User already exists' })
     }
 
-    const user = await User.create(res.body)
+    const user = await User.create(req.body)
 
-    delete user.password
+    user.password = undefined
 
     return res.send({
       user,
@@ -36,7 +36,7 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', async (req, res) => {
-  const { email, password } = res.body
+  const { email, password } = req.body
 
   try {
     const user = await User.findOne({ email }).select('+password')
@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
       return res.status(400).send({ error: 'Invalid password' })
     }
 
-    delete user.password
+    user.password = undefined
 
     return res.send({
       user,

@@ -1,7 +1,7 @@
-const EventsEmitter = require('../events')
-const Listerners = require('../listeners')
+const EventsEmitter = require('./app/events')
+const Listerners = require('./app/listeners')
 
-module.exports = (req, res, next) => {
+module.exports = () => {
   try {
     Object.keys(Listerners).map(event => {
       if (!EventsEmitter[event]) return false
@@ -10,8 +10,5 @@ module.exports = (req, res, next) => {
         EventsEmitter[event].on(listerner, Listerners[event][listerner])
       })
     })
-  } catch (error) {
-    console.log(error)
-  }
-  next()
+  } catch (error) {}
 }

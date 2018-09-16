@@ -5,6 +5,7 @@ const router = express.Router()
 router.use(authMiddleware)
 
 const List = require('../models/list')
+const ListEvent = require('../events/list')
 
 router.get('/', async (req, res) => {
   try {
@@ -28,23 +29,26 @@ router.get('/:listId', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { title, description, completed } = req.body
+    const { name, description, completed } = req.body
 
-    const list = await List.create({ title, description, completed, user: req.userId })
+    const list = await List.create({ name, description, completed, user: req.userId })
+
+    list.populate(['user'])
 
     return res.send({ list })
   } catch (error) {
+    console.log(error)
     return res.status(400).send({ error: 'Error creating new list' })
   }
 })
 
 router.put('/:listId', async (req, res) => {
   try {
-    const { title, description, completed } = req.body
+    const { name, description, completed } = req.body
 
     const list = await List.findByIdAndUpdate(req.params.listId, {
-      title, description, completed
-    }, { new: true })
+      name, description, completed
+    }, { new: true }).populate(['user', 'tasks'])
 
     return res.send({ list })
   } catch (error) {
@@ -55,6 +59,8 @@ router.put('/:listId', async (req, res) => {
 router.delete('/:listId', async (req, res) => {
   try {
     await List.findByIdAndDelete(req.params.listId)
+
+    ListEvent.emit('delTasksFromList', req.params.listId)
 
     return res.send()
   } catch (error) {

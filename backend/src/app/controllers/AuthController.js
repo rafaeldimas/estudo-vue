@@ -1,17 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-
-const { secret } = require('../../config/auth')
 
 const User = require('../models/user')
-
-function generateToken (params = {}) {
-  return jwt.sign(params, secret, {
-    expiresIn: 86400
-  })
-}
+const AuthEvent = require('../events/auth')
 
 router.post('/register', async (req, res) => {
   const { email } = req.body
@@ -25,9 +17,11 @@ router.post('/register', async (req, res) => {
 
     user.password = undefined
 
+    AuthEvent.emit('generateToken', { id: user.id })
+
     return res.send({
       user,
-      token: generateToken({ id: user.id })
+      token: AuthEvent.token
     })
   } catch (error) {
     return res.status(400).send({ error: 'Registration failed' })
@@ -50,9 +44,11 @@ router.post('/login', async (req, res) => {
 
     user.password = undefined
 
+    AuthEvent.emit('generateToken', { id: user.id })
+
     return res.send({
       user,
-      token: generateToken({ id: user.id })
+      token: AuthEvent.token
     })
   } catch (error) {
     return res.status(400).send({ error: 'Login failed' })

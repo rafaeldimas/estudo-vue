@@ -1,9 +1,10 @@
 const List = require('../../models/list')
 
 const assingTaskInList = async ({ task, listId }) => {
+  const tasks = Array.isArray(task) ? task : [ task ]
   const list = await List.findById(listId)
 
-  list.tasks.push(task)
+  tasks.map(item => list.tasks.push(item._id))
 
   await list.save()
 }

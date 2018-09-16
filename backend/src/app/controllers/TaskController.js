@@ -9,7 +9,7 @@ const TaskEvent = require('../events/task')
 
 router.get('/', async (req, res) => {
   try {
-    const tasks = await Task.find().populate(['user', 'list'])
+    const tasks = await Task.find().populate('user')
 
     res.send({ tasks })
   } catch (error) {
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:taskId', async (req, res) => {
   try {
-    const task = await Task.findById(req.params.taskId).populate(['user', 'list'])
+    const task = await Task.findById(req.params.taskId).populate('user')
 
     res.send({ task })
   } catch (error) {
@@ -37,11 +37,10 @@ router.post('/', async (req, res) => {
 
     TaskEvent.emit('assingTaskInList', { task, listId })
 
-    task.populate(['user', 'list'])
+    task.populate('user')
 
     res.send({ task })
   } catch (error) {
-    console.log(error)
     res.status(400).send({ error: 'Error creating task' })
   }
 })
@@ -52,7 +51,7 @@ router.put('/:taskId', async (req, res) => {
 
     const task = await Task.findByIdAndUpdate(req.params.taskId, {
       title, completed, list: listId, user: req.userId
-    }, { new: true }).populate(['user', 'list'])
+    }, { new: true }).populate('user')
 
     res.send({ task })
   } catch (error) {

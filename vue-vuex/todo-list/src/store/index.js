@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 /* Modules */
-import user from './modules/user'
+import auth from './modules/auth'
 import todo from './modules/todo'
 import loading from './modules/loading'
 import notification from './modules/notification'
@@ -13,7 +13,7 @@ const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   modules: {
-    user,
+    auth,
     todo,
     loading,
     notification

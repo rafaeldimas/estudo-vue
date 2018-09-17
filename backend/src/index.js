@@ -1,3 +1,4 @@
+const cors = require('cors')
 const express = require('express')
 const bodyParser = require('body-parser')
 const controllers = require('./app/controllers')
@@ -7,6 +8,7 @@ defineEvents()
 
 const app = express()
 
+app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 

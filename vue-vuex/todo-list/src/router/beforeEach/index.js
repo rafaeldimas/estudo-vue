@@ -1,6 +1,13 @@
-import store from '../store'
+import store from '@/store'
 
 const beforeEach = (to, from, next) => {
+  store.dispatch('loading/setStatus', true)
+
+  /* Log in with a persistent login */
+  if (window.localStorage.getItem('token')) {
+    window.sessionStorage.setItem('token', window.localStorage.getItem('token'))
+  }
+
   /* Log in with a persistent login */
   if (window.localStorage.getItem('user')) {
     window.sessionStorage.setItem('user', window.localStorage.getItem('user'))
@@ -21,8 +28,6 @@ const beforeEach = (to, from, next) => {
       return next({ name: 'PagePanel' })
     }
   }
-
-  store.dispatch('loading/setStatus', true)
 
   next()
 }

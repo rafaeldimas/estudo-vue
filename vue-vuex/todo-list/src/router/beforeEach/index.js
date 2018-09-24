@@ -1,4 +1,5 @@
 import store from '@/store'
+import { setToken } from '@/plugins/http'
 
 const beforeEach = (to, from, next) => {
   store.dispatch('loading/setStatus', true)
@@ -13,7 +14,12 @@ const beforeEach = (to, from, next) => {
     window.sessionStorage.setItem('user', window.localStorage.getItem('user'))
   }
 
+  const tokenSession = window.sessionStorage.getItem('token')
   const userSession = window.sessionStorage.getItem('user')
+
+  if (tokenSession) {
+    setToken(tokenSession)
+  }
 
   /* Confirm that a user is logged in on the pages that requires login */
   if (to.meta.requiresAuth) {

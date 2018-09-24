@@ -86,7 +86,7 @@ export default {
             header: 'Login Success',
             text: `Welcome ${user.name}, please wait while you are redirected.`
           })
-          setTimeout(() => this.resetNotifications() || this.$router.push('/panel'), 1500)
+          setTimeout(() => this.resetNotifications() && this.$router.push('/panel'), 1500)
         }).catch((error) => {
           this.addNotificationDanger({
             header: 'Login failed',

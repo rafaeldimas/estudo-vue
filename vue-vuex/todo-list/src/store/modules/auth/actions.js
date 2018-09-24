@@ -39,7 +39,7 @@ const login = async ({ commit }, payload) => {
     window.localStorage.setItem('user', JSON.stringify(data.user))
   }
 
-  return data
+  return data.user
 }
 
 const logout = ({ commit }) => commit('unsetUser') || commit('unsetToken')

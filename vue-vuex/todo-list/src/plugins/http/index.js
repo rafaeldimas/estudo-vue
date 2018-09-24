@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { api } from '../../config'
+import { api } from '@/config'
 
 export const http = axios.create({
   baseURL: api.url
